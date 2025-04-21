@@ -91,13 +91,13 @@ elif choice == "Register":
         else:
             st.error("Both field are required.")
 
-    elif choice == "Login":
-        st.subheader("🔑Login")
+elif choice == "Login":
+    st.subheader("🔑Login")
         
-        if time.time() < st.session_state.lockout_time:
-            remaining_time = int(st.session_state.lockout_time - time.time())
-            st.error(f"Too many failed attempts. Please wait ⌛ {remaining_time} seconds")
-            st.stop()
+    if time.time() < st.session_state.lockout_time:
+        remaining_time = int(st.session_state.lockout_time - time.time())
+        st.error(f"Too many failed attempts. Please wait ⌛ {remaining_time} seconds")
+        st.stop()
 
         username = st.text_input("Username")
         password = st.text_input("Password", type="password")
