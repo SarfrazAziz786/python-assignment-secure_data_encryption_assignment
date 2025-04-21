@@ -1,4 +1,3 @@
  txt
-   pandas
-   openpyxl
    streamlit
+   cryptography
