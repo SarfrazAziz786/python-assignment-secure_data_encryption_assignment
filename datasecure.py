@@ -1,7 +1,7 @@
 import streamlit as st
 import hashlib # to hash passwords
 import json # to store data in json file
-import os
+import os # to check if file exists
 import time
 from cryptography.fernet import Fernet # for data encryption
 from base64 import urlsafe_b64encode # for encoding the key 
@@ -159,7 +159,7 @@ elif choice == "Retrieve Data":
                     st.success(f"Decrypted  {result}")
                 else: 
                     st.error("❌ incorrect passkey or corrupted data")
-                    
+
 
 
 
