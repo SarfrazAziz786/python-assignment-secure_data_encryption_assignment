@@ -92,12 +92,7 @@ elif choice == "Register":
             st.error("Both field are required.")
 
 elif choice == "Login":
-    st.subheader("🔑Login")
-    
-
-
-
-
+    st.subheader("🔑User Login")
 
     if time.time() < st.session_state.lockout_time:
         remaining_time = int(st.session_state.lockout_time - time.time())
@@ -117,10 +112,10 @@ elif choice == "Login":
             remaining = 3 - st.session_state.failed_attempts
             st.error(f"⚠️Invalid credentials. {remaining} attempts left.")
 
-        if st.session_state.failed_attempts >= 3:
-            st.session_state.lockout_time = time.time() + LOCKOUT_DURATION
-            st.error(f"🛑Too many failed attempts. Please wait ⌛ {LOCKOUT_DURATION} seconds")
-            st.stop()
+            if st.session_state.failed_attempts >= 3:
+                st.session_state.lockout_time = time.time() + LOCKOUT_DURATION
+                st.error(f"🛑Too many failed attempts. Please wait ⌛ {LOCKOUT_DURATION} seconds")
+                st.stop()
 
 # === Store Data ===
 
