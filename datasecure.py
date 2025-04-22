@@ -84,7 +84,7 @@ elif choice == "Register":
             else:
                 stored_data[username] = {
                     "password": hash_password(password),
-                    "data": {}
+                    "data": []
                 }
                 save_data(stored_data)
                 st.success("User registered successfully!")
