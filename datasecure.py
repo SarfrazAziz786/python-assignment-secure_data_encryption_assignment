@@ -93,29 +93,34 @@ elif choice == "Register":
 
 elif choice == "Login":
     st.subheader("🔑Login")
-        
+    
+
+
+
+
+
     if time.time() < st.session_state.lockout_time:
         remaining_time = int(st.session_state.lockout_time - time.time())
         st.error(f"Too many failed attempts. Please wait ⌛ {remaining_time} seconds")
         st.stop()
 
-        username = st.text_input("Username")
-        password = st.text_input("Password", type="password")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
 
-        if st.button("Login"):
-            if username in stored_data and stored_data[username]["password"] == hash_password(password):
-                st.session_state.authenticated_user = username
-                st.session_state.failed_attempts = 0
-                st.success(f"Welcome, {username}!")
-            else:
-                st.session_state.failed_attempts += 1
-                remaining = 3 - st.session_state.failed_attempts
-                st.error(f"⚠️Invalid credentials. {remaining} attempts left.")
+    if st.button("Login"):
+        if username in stored_data and stored_data[username]["password"] == hash_password(password):
+            st.session_state.authenticated_user = username
+            st.session_state.failed_attempts = 0
+            st.success(f"Welcome, {username}!")
+        else:
+            st.session_state.failed_attempts += 1
+            remaining = 3 - st.session_state.failed_attempts
+            st.error(f"⚠️Invalid credentials. {remaining} attempts left.")
 
-                if st.session_state.failed_attempts >= 3:
-                    st.session_state.lockout_time = time.time() + LOCKOUT_DURATION
-                    st.error(f"🛑Too many failed attempts. Please wait ⌛ {LOCKOUT_DURATION} seconds")
-                    st.stop()
+        if st.session_state.failed_attempts >= 3:
+            st.session_state.lockout_time = time.time() + LOCKOUT_DURATION
+            st.error(f"🛑Too many failed attempts. Please wait ⌛ {LOCKOUT_DURATION} seconds")
+            st.stop()
 
 # === Store Data ===
 
